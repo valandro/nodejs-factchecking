@@ -1,0 +1,33 @@
+{
+    "name": "nodejs-factchecking-webscraping",
+    "version": "1.0.0",
+    "description": "NodeJS fact checking web scraping",
+    "main": "index.js",
+    "scripts": {
+      "start": "node -r dotenv/config src/main.js",
+      "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "keywords": [
+      "web",
+      "scraping",
+      "data",
+      "collection",
+      "html",
+      "parsing",
+      "web crawler",
+      "consumer kafka",
+      "kafka"
+    ],
+    "author": "Lucas Valandro",
+    "license": "MIT",
+    "dependencies": {
+      "dotenv": "^15.0.0",
+      "fast-csv": "^4.3.6",
+      "kafkajs": "^1.15.0",
+      "puppeteer": "^19.4.0",
+      "redis": "^4.2.0",
+      "uuid": "^8.3.2",
+      "zipson": "^0.2.12"
+    }
+  }
+  
