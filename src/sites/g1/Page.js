@@ -6,8 +6,6 @@
 "use strict";
 require('events').EventEmitter.defaultMaxListeners = 0
 const puppeteer = require('puppeteer');
-const DateConverter = require('../../utils/dateConverter')
-const Scraping = require('./Scraping')
 const fs = require('fs')
 
 const start = new Date().getTime();
@@ -23,18 +21,13 @@ function queryPage(link) {
             const __page = await browser.newPage();
             await __page.goto(link, { waitUntil: 'load', timeout: 0 });
         
-            // Remove empty strings
-            const links = (await __page.evaluate(() => Array.from(document.querySelectorAll('.infinite-container > a'), a => a.href))).filter(it => it !== "");
-        
-            // console.log(links)
+            const links = (await __page.evaluate(() => Array.from(document.querySelectorAll('._evt > h2 > a'), a => a.href))).filter(it => it !== "");    
+
+            console.log(links)
     
             await browser.close();
     
             let data = links
-            // Scraping.walkThrough(links)
-            //     .then(res =>
-            //         data = res
-            //     )
     
             const end = new Date().getTime();
             const time = end - start;
