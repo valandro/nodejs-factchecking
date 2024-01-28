@@ -21,10 +21,8 @@ function queryPage(link) {
             const __page = await browser.newPage();
             await __page.goto(link, { waitUntil: 'load', timeout: 0 });
         
-            const links = (await __page.evaluate(() => Array.from(document.querySelectorAll('._evt > h2 > a'), a => a.href))).filter(it => it !== "");    
+            const links = (await __page.evaluate(() => Array.from(document.querySelectorAll('._evt > h2 > a'), a => a.href))).filter(it => it !== "" && it.includes('g1.globo.com'));   
 
-            console.log(links)
-    
             await browser.close();
     
             let data = links

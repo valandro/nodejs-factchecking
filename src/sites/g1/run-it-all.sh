@@ -1,0 +1,1 @@
+for i in {37..40}; do npm run g1 --page ${i}; sleep 1; done
