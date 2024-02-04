@@ -24,4 +24,14 @@ module.exports = class DateConverter {
         const minutes = dayArray[4].replace('\n', '').split('h')[1].padStart(2, "0")
         return new Date(`${year}-${month}-${day}T${hour}:${minutes}:00.000-03:00`)
     }
+
+    static dateEstadaoConverter(dateString) {
+        const dateSplitted = dateString.split(' | ')
+        const day = dateSplitted[0].split('/')[0];
+        const month = dateSplitted[0].split('/')[1];
+        const year = dateSplitted[0].split('/')[2];
+        const hour = dateSplitted[1].split('h')[0].padStart(2, "0")
+        const minutes = dateSplitted[1].split('h')[1].padStart(2, "0")
+        return new Date(`${year}-${month}-${day}T${hour}:${minutes}:00.000-03:00`)
+    }
 }

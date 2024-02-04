@@ -1,0 +1,1 @@
+for i in {0..89}; do npm run estadao --page ${i}; sleep 1; done

@@ -6,6 +6,7 @@
     "scripts": {
       "aosfatos": "node -r dotenv/config src/sites/aosfatos/main.js",
       "g1": "node -r dotenv/config src/sites/g1/main.js",
+      "estadao": "node -r dotenv/config src/sites/estadao/main.js",
       "test": "echo \"Error: no test specified\" && exit 1"
     },
     "keywords": [
