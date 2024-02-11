@@ -1,6 +1,6 @@
 const fs = require('fs');
 
-const readJsonFile = (fileName) => {
+const readJson = (fileName) => {
     try {
       const data = fs.readFileSync(fileName, 'utf8');
       return JSON.parse(data);
@@ -26,11 +26,15 @@ const writeObjectToFile = (fileName, data) => {
 };
 
 module.exports.writeFile = function(fileName, data) {
-    let file = readJsonFile(fileName)
+    let file = readJson(fileName)
     file.push(...data);
     writeObjectToFile(fileName, file)
 }
 
 module.exports.readCsvFile = function(fileName) {
     return readCsv(fileName)
+}
+
+module.exports.readJsonFile = function(fileName) {
+    return readJson(fileName)
 }
