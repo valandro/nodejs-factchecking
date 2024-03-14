@@ -1,13 +1,12 @@
-from transformers import AutoTokenizer  # Or BertTokenizer
+from transformers import AutoTokenizer, AutoModelForSequenceClassification  # Or BertTokenizer
 from transformers import AutoModelForPreTraining  # Or BertForPreTraining for loading pretraining heads
 from transformers import AutoModel  # or BertModel, for BERT without pretraining heads
 from transformers import pipeline
 
 model_name = 'neuralmind/bert-base-portuguese-cased'
-model = AutoModelForPreTraining.from_pretrained(model_name)
-tokenizer = AutoTokenizer.from_pretrained(model_name, do_lower_case=False)
+model = AutoTokenizer.from_pretrained(model_name)
 
-pipe = pipeline('fill-mask', model=model_name, tokenizer=tokenizer)
+pipe = pipeline('fill-mask', model=model_name, tokenizer=model)
 
 results = pipe('Eu moro em uma [MASK] muito grande.')
 for i in range(len(results)):

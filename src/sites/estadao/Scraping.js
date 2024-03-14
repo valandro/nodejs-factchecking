@@ -78,13 +78,15 @@ function querySite(url) {
                 const time = end - start;
                 console.log(`Execution ${url} time: ${time}`); 
 
-                return {
-                    'score': score,
-                    'title': title,
-                    'author': authorText,
-                    'publish_date': dateText,
-                    'raw_content': content
-                }
+                return content.map(c => {
+                    return {
+                        'score': score,
+                        'title': title,
+                        'author': authorText,
+                        'publish_date': dateText,
+                        'raw_content': c
+                    }  
+                })
             } catch(err) {
                 console.log(err)
                 await browser.close();

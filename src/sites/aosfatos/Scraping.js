@@ -46,14 +46,16 @@ function querySite(url, score) {
                 const end = new Date().getTime();
                 const time = end - start;
                 console.log(`Execution ${url} time: ${time}`);
-
-                return {
-                    'score': score,
-                    'title': titleText,
-                    'author': authorText,
-                    'publish_date': date,
-                    'raw_content': content
-                }
+                const actualScore = score == false ? 0 : 1
+                return content.map(c => {
+                    return {
+                        'score': actualScore,
+                        'title': titleText,
+                        'author': authorText,
+                        'publish_date': date,
+                        'raw_content': c
+                    }  
+                })
             } catch(err) {
                 await browser.close();
                 return null

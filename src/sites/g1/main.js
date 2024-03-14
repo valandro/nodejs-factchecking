@@ -12,7 +12,7 @@ const page = args[0];
         .then(res => {
             console.log(`result links ${Array.from(res)[0]}`);
             Scraping.walkThrough(Array.from(res)).then(res => {
-                File.writeFile(`./src/sites/g1/result/file.json`, res)
+                File.writeFile(`./src/sites/g1/result/file.json`, res.flat(Infinity))
             })
         })
     }

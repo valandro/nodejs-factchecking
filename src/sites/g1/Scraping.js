@@ -24,8 +24,10 @@ function querySite(url) {
                 await __page.goto(url, { waitUntil: 'load', timeout: 0 });
 
                 // Remove empty strings
-                const score = url.includes('e-fato')
-                
+                const contextPath = url.match(/[^/]*.ghtml/g)[0]
+                const factScore = contextPath.includes('fato')
+                const fakeScore = contextPath.includes('fake')
+
                 const author = await __page.waitForSelector('.content-publication-data__from', { visible: true });
 
                 const title = await __page.evaluate(() => {
@@ -48,13 +50,24 @@ function querySite(url) {
                 const time = end - start;
                 console.log(`Execution ${url} time: ${time}`);
 
-                return {
-                    'score': score,
-                    'title': title,
-                    'author': authorText,
-                    'publish_date': date,
-                    'raw_content': content
+                let numberScore;
+                if (factScore && fakeScore) {
+                    numberScore = 3;
+                } else if(factScore) {
+                    numberScore = 5;
+                } else if(fakeScore) {
+                    numberScore = 0;
                 }
+
+                return content.map(c => {
+                    return {
+                        'score': numberScore,
+                        'title': title,
+                        'author': authorText,
+                        'publish_date': date,
+                        'raw_content': c
+                    }  
+                })
             } catch(err) {
                 console.log(err)
                 await browser.close();
