@@ -2,6 +2,8 @@ https://www.estadao.com.br/pf/api/v3/content/fetch/story-feed-query?query={%22bo
 
 API call para Estadao
 
+https://www.estadao.com.br/pf/api/v3/content/fetch/story-feed-query?query={%22included_fields%22:%22_id,canonical_url%22,%22offset%22:%221701%22,%22query%22:%22%22,%22size%22:100,%22sort%22:%22first_publish_date:desc%22}
+
 Ajustar parametro de offset e size para recuperar as notícias
 
 Script para montar arquivo CSV com base no raw_sites

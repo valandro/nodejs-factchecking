@@ -38,3 +38,18 @@ module.exports.readCsvFile = function(fileName) {
 module.exports.readJsonFile = function(fileName) {
     return readJson(fileName)
 }
+
+module.exports.appendToCSV = function(data, fileName) {
+  appendToCSV(data, fileName)
+}
+
+function appendToCSV(data, filename) {
+  // Create a stream to append data to the file
+  const stream = fs.createWriteStream(filename, { flags: 'a' });
+
+  // Append the data to the file
+  stream.write(data + '\n');
+
+  // Close the stream
+  stream.end();
+}

@@ -1,1 +1,1 @@
-for i in {0..20}; do npm run estadao --page ${i}; sleep 1; done
+for i in {1774..1900}; do npm run estadao --page ${i}; sleep 1; done

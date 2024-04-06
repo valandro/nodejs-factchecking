@@ -10,12 +10,25 @@ const startIndex = page * 5;
 const endIndex = startIndex + 5;
 
 (async () => {
-    // const links = File.readCsvFile('./src/sites/estadao/new-sites.csv');
+    console.log(`ARGV PAGE ${page}`);
+    // const links = File.readCsvFile('./src/sites/estadao/sites-true.csv');
     // const selectedLinks = links.splice(startIndex, endIndex - startIndex + 1);
-    // Scraping.walkThrough(selectedLinks).then(res => {
-    //     File.writeFile(`./src/sites/estadao/result/new-sites-result.json`, res.flat(Infinity))
+    // const filteredLinks = selectedLinks.filter(link => !link.includes('web-stories') && !link.includes('lourival'))
+    // Scraping.walkThrough(filteredLinks).then(res => {
+    //     File.writeFile(`./src/sites/estadao/result/sites-true-result.json`, res.flat(Infinity).filter(it => it != null))
     // })
-    const data = File.readJsonFile('./src/sites/g1/result/file.json')
-    File.writeFile(`./final_dataset.json`, data)
+
+    // const data = File.readJsonFile('./src/sites/estadao/raw_sites')
+    // data['content_elements'].forEach(it => {
+    //     console.log('https://www.estadao.com.br'+it['canonical_url'])
+    // })
+    // data['content_elements'].forEach(it => {
+    //     File.appendToCSV('https://www.estadao.com.br'+it['canonical_url'], './src/sites/estadao/sites-true.csv')
+    // })
+
+    const fakeData = File.readJsonFile('./final_dataset.json');
+    const newsData = File.readJsonFile('./src/sites/estadao/result/sites-true-result.json');
+    File.writeFile('./full_dataset.json', fakeData);
+    File.writeFile('./full_dataset.json', newsData);
 }
 )()
