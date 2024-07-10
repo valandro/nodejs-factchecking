@@ -26,9 +26,14 @@ const endIndex = startIndex + 5;
     //     File.appendToCSV('https://www.estadao.com.br'+it['canonical_url'], './src/sites/estadao/sites-true.csv')
     // })
 
-    const fakeData = File.readJsonFile('./final_dataset.json');
+    // const fakeData = File.readJsonFile('./final_dataset.json');
     const newsData = File.readJsonFile('./src/sites/estadao/result/sites-true-result.json');
-    File.writeFile('./full_dataset.json', fakeData);
-    File.writeFile('./full_dataset.json', newsData);
+    let data = new Set();
+    newsData.forEach(element => {
+        data.add(element.title)
+    });
+    console.log(data.size)
+    // File.writeFile('./full_dataset.json', fakeData);
+    // File.writeFile('./full_dataset.json', newsData);
 }
 )()
