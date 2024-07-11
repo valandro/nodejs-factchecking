@@ -43,6 +43,17 @@ module.exports.appendToCSV = function(data, fileName) {
   appendToCSV(data, fileName)
 }
 
+module.exports.getPublishDateIfExists = function(fileName, author, title) {
+  let file = readJson(fileName)
+  let publish_date = null
+  file.forEach(element => {
+    if (element != null && element['author'] == author && element['title'] == title) {
+      publish_date = element['publish_date']
+    }
+  });
+  return publish_date;
+}
+
 function appendToCSV(data, filename) {
   // Create a stream to append data to the file
   const stream = fs.createWriteStream(filename, { flags: 'a' });
