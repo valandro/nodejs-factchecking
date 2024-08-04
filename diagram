@@ -1,0 +1,21 @@
+actor Usuário
+
+Usuário->WebCrawler: Informa qual verificador será utilizado
+WebCrawler->Usuário: OK
+WebCrawler-->SeedProvider: Busca página inicial com as notícias verificadas
+SeedProvider->WWW: Acessa internet para recuperar os dados
+WWW->SeedProvider: OK
+SeedProvider-->WebCrawler: Retorna lista de URLs
+loop até URLs acabarem
+note over WebCrawler: Percorre todas as URLs\nextraindo as informações\nde forma assíncrona
+WebCrawler-->WebScraper: Informa URL de uma notícia específica
+WebScraper->WWW: Busca página na Web
+WWW->WebScraper: OK
+WebScraper->WebScraper: Extrai dados e metadados da página web
+WebScraper-->WebCrawler: Retorna dados e metados
+end
+
+database Arquivo
+WebCrawler-->Arquivo: Conforme os dados são retornadaos,\neles são escritos no arquivo de saída
+
+Usuário->Arquivo: Acessa informações no arquivo de saída

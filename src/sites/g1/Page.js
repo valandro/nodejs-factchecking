@@ -29,7 +29,7 @@ function queryPage(link) {
     
             const end = new Date().getTime();
             const time = end - start;
-            console.log(`Execution ${link} time: ${time}`);
+            console.log(`Execution ${link} time: ${time/1000} sec`);
             return data
         })()
         .then(res => resolve(res))
