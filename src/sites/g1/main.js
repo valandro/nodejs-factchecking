@@ -11,15 +11,43 @@ var page = args[0];
     if (typeof page === 'undefined') {
         page = 25;
     }
-    for (let i = page; i <= page; i++) {
-        Page.walkThrough(`https://g1.globo.com/fato-ou-fake/index/feed/pagina-${i}.ghtml`)
-        .then(res => {
-            console.log(`result links ${Array.from(res)[0]}`);
-            Scraping.walkThrough(Array.from(res)).then(res => {
-                File.writeFile(`./src/sites/g1/result/file.json`, res.flat(Infinity))
-                console.timeEnd('Elapsed time');
-            })
-        })
+
+    const urlPromises = [];
+
+    for (let i = page; i <= page + 10; i++) {
+        urlPromises.push(Page.walkThrough(`https://g1.globo.com/fato-ou-fake/index/feed/pagina-${i}.ghtml`))
     }
+
+    const urlResults = await Promise.all(urlPromises);
+    const slicedUrls = await dividirArrayEmTamanhosFixos(urlResults.flat(Infinity), 3);
+    for (let sliced of slicedUrls) {
+        const pagesResult = await Scraping.walkThrough(Array.from(sliced).flat(Infinity));
+        await File.writeFile(`./src/sites/g1/result/new-test.json`, pagesResult.flat(Infinity));
+    }
+    console.timeEnd('Elapsed time');
+    console.log(`Total news: ${Array.from(urlResults).flat(Infinity).length}`);
+    // for (let i = page; i <= page + 10; i++) {
+    //     Page.walkThrough(`https://g1.globo.com/fato-ou-fake/index/feed/pagina-${i}.ghtml`)
+    //     .then(res => {
+    //         console.log(`Total news: ${Array.from(res).flat(Infinity).length}`);
+    //         Scraping.walkThrough(Array.from(res)).then(res => {
+    //             File.writeFile(`./src/sites/g1/result/file.json`, res.flat(Infinity))
+    //             console.timeEnd('Elapsed time');
+    //         })
+    //     })
+    // }
 }
 )()
+
+async function dividirArrayEmTamanhosFixos(array, tamanho) {
+    if (tamanho <= 0) {
+        throw new Error('O tamanho do sub-array deve ser maior que zero.');
+    }
+
+    let resultado = [];
+    for (let i = 0; i < array.length; i += tamanho) {
+        resultado.push(array.slice(i, i + tamanho));
+    }
+
+    return resultado;
+}

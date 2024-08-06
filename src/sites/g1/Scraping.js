@@ -48,7 +48,7 @@ function querySite(url) {
 
                 const end = new Date().getTime();
                 const time = end - start;
-                console.log(`Execution ${url} time: ${time}`);
+                console.log(`Execution ${url} time: ${time/1000} sec`);
 
                 let numberScore;
                 if (factScore && fakeScore) {
