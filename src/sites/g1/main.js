@@ -5,27 +5,39 @@ const Scraping = require('./Scraping');
 const File = require('../../utils/file');
 var args = process.argv.slice(2);
 var page = args[0];
+const fixedNewsSize = 100;
+const crawlers = 1;
 
 (async () => {
     console.time('Elapsed time');
     if (typeof page === 'undefined') {
-        page = 25;
+        page = 1;
     }
 
     const urlPromises = [];
+    // const urlPromises2 = [];
 
-    for (let i = page; i <= page + 10; i++) {
+    let i;
+    for (i = page; i <= page + 13; i++) {
         urlPromises.push(Page.walkThrough(`https://g1.globo.com/fato-ou-fake/index/feed/pagina-${i}.ghtml`))
     }
 
-    const urlResults = await Promise.all(urlPromises);
-    const slicedUrls = await dividirArrayEmTamanhosFixos(urlResults.flat(Infinity), 3);
+    let urlResults = await Promise.all(urlPromises);
+
+    // for (let j = i; j <= i + 13; j++) {
+    //     urlPromises2.push(Page.walkThrough(`https://g1.globo.com/fato-ou-fake/index/feed/pagina-${j}.ghtml`))
+    // }
+
+    // let urlResults2 = await Promise.all(urlPromises2);
+    // urlResults.push(...urlResults2);
+    const urlResultsSliced = urlResults.flat(Infinity).slice(0, fixedNewsSize);
+    const slicedUrls = await dividirArrayEmTamanhosFixos(urlResultsSliced, crawlers);
     for (let sliced of slicedUrls) {
         const pagesResult = await Scraping.walkThrough(Array.from(sliced).flat(Infinity));
         await File.writeFile(`./src/sites/g1/result/new-test.json`, pagesResult.flat(Infinity));
     }
     console.timeEnd('Elapsed time');
-    console.log(`Total news: ${Array.from(urlResults).flat(Infinity).length}`);
+    console.log(`Total news: ${Array.from(urlResultsSliced).flat(Infinity).length}`);
     // for (let i = page; i <= page + 10; i++) {
     //     Page.walkThrough(`https://g1.globo.com/fato-ou-fake/index/feed/pagina-${i}.ghtml`)
     //     .then(res => {

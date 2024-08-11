@@ -1,35 +1,3 @@
-{
-    "name": "nodejs-factchecking-webscraping",
-    "version": "1.0.0",
-    "description": "NodeJS fact checking web scraping",
-    "main": "index.js",
-    "scripts": {
-      "aosfatos": "node -r dotenv/config src/sites/aosfatos/main.js",
-      "g1": "node -r dotenv/config src/sites/g1/main.js",
-      "estadao": "node -r dotenv/config src/sites/estadao/main.js",
-      "test": "echo \"Error: no test specified\" && exit 1"
-    },
-    "keywords": [
-      "web",
-      "scraping",
-      "data",
-      "collection",
-      "html",
-      "parsing",
-      "web crawler",
-      "consumer kafka",
-      "kafka"
-    ],
-    "author": "Lucas Valandro",
-    "license": "MIT",
-    "dependencies": {
-      "dotenv": "^15.0.0",
-      "fast-csv": "^4.3.6",
-      "kafkajs": "^1.15.0",
-      "puppeteer": "^19.4.0",
-      "redis": "^4.2.0",
-      "uuid": "^8.3.2",
-      "zipson": "^0.2.12"
-    }
-  }
-  
+version https://git-lfs.github.com/spec/v1
+oid sha256:1c93c3c60da3f73d7f89de06510578f531612fb34ab9f8a62d2b1695d8552a97
+size 937
